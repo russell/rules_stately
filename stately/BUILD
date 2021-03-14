@@ -1,12 +1,13 @@
+package(default_visibility = ["//visibility:public"])
+
 exports_files(
     ["runner.bash.template"],
-    visibility = ["//visibility:public"],
 )
 
 alias(
-    name = "kbld_tool",
+    name = "stately_tool",
     actual = select({
-        "@bazel_tools//src/conditions:linux_x86_64": "@kbld//file",
-        "@bazel_tools//src/conditions:darwin": "@kbld_osx//:kbld",
+        "@bazel_tools//src/conditions:linux_x86_64": "@stately_linux//:stately",
+        "@bazel_tools//src/conditions:darwin": "@stately_osx//:stately",
     }),
 )

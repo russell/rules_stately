@@ -3,6 +3,7 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 def stately_repositories():
     http_archive(
         name = "stately_linux",
+        sha256 = "3f7ff398e09e233f4e5a45318e7dab95825289dd75ac811ce38f7e452c1058dd",
         urls = ["https://github.com/russell/stately/releases/download/v0.0.1/stately-linux-amd64.tar.gz"],
         build_file = "@com_github_russell_stately//stately:stately.BUILD",
     )
