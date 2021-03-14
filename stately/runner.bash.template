@@ -1,5 +1,5 @@
 #! /usr/bin/env bash
-set -x
+set -e
 STATELY_SHORT_PATH=@@STATELY_SHORT_PATH@@
 ARGS=@@ARGS@@
 OUTPUT_DIRECTORY=@@OUTPUT_DIRECTORY@@
