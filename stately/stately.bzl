@@ -7,9 +7,8 @@ def _stately_show_impl(ctx):
     input_files = ctx.files.srcs
 
     args = [
-        a for a in
-        ["copy"] +
-        [f.short_path for f in input_files]
+        a
+        for a in ["copy"] + [f.short_path for f in input_files]
         if a != ""
     ]
 
@@ -48,7 +47,7 @@ stately = rule(
             doc = "The output directory",
         ),
         "state_file": attr.string(
-            default = '.stately.yml',
+            default = ".stately.yml",
             doc = "The output directory",
         ),
         "_stately": attr.label(
