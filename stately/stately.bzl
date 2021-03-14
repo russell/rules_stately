@@ -51,13 +51,13 @@ stately = rule(
             doc = "The output directory",
         ),
         "_stately": attr.label(
-            default = "@com_github_russell_stately//stately:stately_tool",
+            default = "//stately:stately_tool",
             cfg = "host",
             allow_single_file = True,
             executable = True,
         ),
         "_runner": attr.label(
-            default = "@com_github_russell_stately//stately:runner.bash.template",
+            default = "//stately:runner.bash.template",
             allow_single_file = True,
         ),
     },
