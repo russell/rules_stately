@@ -4,13 +4,13 @@ def stately_repositories():
     http_archive(
         name = "stately_linux",
         urls = ["https://github.com/russell/stately/releases/download/v0.0.2/stately-linux-amd64.tar.gz"],
-        build_file = "@com_github_russell_stately//stately:stately.BUILD",
+        build_file = "@com_github_russell_rules_stately//stately:stately.BUILD",
     )
 
     http_archive(
         name = "stately_osx",
         urls = ["https://github.com/russell/stately/releases/download/v0.0.2/stately-darwin-amd64.tar.gz"],
-        build_file = "@com_github_russell_stately//stately:stately.BUILD",
+        build_file = "@com_github_russell_rules_stately//stately:stately.BUILD",
     )
 
     _maybe(
