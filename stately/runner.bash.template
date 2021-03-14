@@ -6,13 +6,12 @@ OUTPUT_DIRECTORY=@@OUTPUT_DIRECTORY@@
 STATE_FILE_PATH=@@STATE_FILE_PATH@@
 
 # Should be the root that the user ran the bazel command from
-WORKSPACE=$(pwd)
+BIN_WORKSPACE=$(pwd)/../..
 
 # Get the absolute path to the stately executable
 stately_short_path=$(readlink "$STATELY_SHORT_PATH")
 
-set -ex
+# This is the actual project root
+cd $BIN_WORKSPACE
 
-# this should be the root of the bazel built files
-cd $(bazel info bazel-genfiles)
-$stately_short_path "${ARGS[@]}" --state-file $WORKSPACE/$STATE_FILE_PATH -o $WORKSPACE/$OUTPUT_DIRECTORY
+$stately_short_path "${ARGS[@]}" --state-file $BUILD_WORKSPACE_DIRECTORY/$STATE_FILE_PATH -o $BUILD_WORKSPACE_DIRECTORY/$OUTPUT_DIRECTORY
