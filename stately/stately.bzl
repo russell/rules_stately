@@ -5,6 +5,10 @@ load("@bazel_skylib//lib:shell.bzl", "shell")
 
 def _stately_show_impl(ctx):
     input_files = ctx.files.srcs
+    if ctx.attr.state_file:
+        state_file = ctx.attr.state_file
+    else:
+        state_file = ".%s.yaml" % ctx.label.name
 
     args = [
         a
@@ -16,7 +20,7 @@ def _stately_show_impl(ctx):
     substitutions = {
         "@@ARGS@@": shell.array_literal(args),
         "@@OUTPUT_DIRECTORY@@": ctx.attr.output,
-        "@@STATE_FILE_PATH@@": ctx.attr.state_file,
+        "@@STATE_FILE_PATH@@": state_file,
         "@@STATELY_SHORT_PATH@@": shell.quote(ctx.executable._stately.short_path),
     }
     ctx.actions.expand_template(
@@ -47,7 +51,6 @@ stately = rule(
             doc = "The output directory",
         ),
         "state_file": attr.string(
-            default = ".stately.yml",
             doc = "The output directory",
         ),
         "_stately": attr.label(
