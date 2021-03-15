@@ -3,13 +3,13 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 def stately_repositories():
     http_archive(
         name = "stately_linux",
-        urls = ["https://github.com/russell/stately/releases/download/v0.0.3/stately-linux-amd64.tar.gz"],
+        urls = ["https://github.com/russell/stately/releases/download/v0.0.4/stately-linux-amd64.tar.gz"],
         build_file = "@com_github_russell_rules_stately//stately:stately.BUILD",
     )
 
     http_archive(
         name = "stately_osx",
-        urls = ["https://github.com/russell/stately/releases/download/v0.0.3/stately-darwin-amd64.tar.gz"],
+        urls = ["https://github.com/russell/stately/releases/download/v0.0.4/stately-darwin-amd64.tar.gz"],
         build_file = "@com_github_russell_rules_stately//stately:stately.BUILD",
     )
 
