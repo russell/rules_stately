@@ -29,7 +29,7 @@ def _stately_show_impl(ctx):
     return [
         DefaultInfo(
             files = depset([runner_out_file]),
-            runfiles = ctx.runfiles(files = [ctx.executable._stately]),
+            runfiles = ctx.runfiles(files = [ctx.executable._stately] + ctx.files.srcs),
             executable = runner_out_file,
         ),
     ]
