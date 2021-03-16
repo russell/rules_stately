@@ -19,6 +19,7 @@ def _stately_show_impl(ctx):
     runner_out_file = ctx.actions.declare_file(ctx.label.name + ".bash")
     substitutions = {
         "@@ARGS@@": shell.array_literal(args),
+        "@@BIN_DIRECTORY@@": ctx.bin_dir.path,
         "@@OUTPUT_DIRECTORY@@": ctx.attr.output,
         "@@STATE_FILE_PATH@@": state_file,
         "@@STATELY_SHORT_PATH@@": shell.quote(ctx.executable._stately.short_path),
