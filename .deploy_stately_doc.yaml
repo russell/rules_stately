@@ -1,0 +1,4 @@
+apiVersion: simopolis.xyz/v1alpha1
+directories:
+- Path: stately/README.md
+kind: StateConfig
