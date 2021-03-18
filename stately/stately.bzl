@@ -8,7 +8,7 @@ def _stately_show_impl(ctx):
     if ctx.attr.state_file:
         state_file = ctx.attr.state_file
     else:
-        state_file = ".%s.yaml" % ctx.label.name
+        state_file = ".stately.yaml"
 
     args = [
         a
@@ -23,6 +23,7 @@ def _stately_show_impl(ctx):
         "@@OUTPUT_DIRECTORY@@": ctx.attr.output,
         "@@STATE_FILE_PATH@@": state_file,
         "@@STATELY_SHORT_PATH@@": shell.quote(ctx.executable._stately.short_path),
+        "@@NAME@@": "//%s:%s" % (ctx.label.package, ctx.label.name),
     }
     ctx.actions.expand_template(
         template = ctx.file._runner,
@@ -52,7 +53,7 @@ stately = rule(
             doc = "The output directory",
         ),
         "state_file": attr.string(
-            doc = "The output directory",
+            doc = "The state file name",
         ),
         "_stately": attr.label(
             default = "//stately:stately_tool",
