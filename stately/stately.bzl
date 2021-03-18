@@ -16,12 +16,18 @@ def _stately_show_impl(ctx):
         if a != ""
     ]
 
+    if ctx.attr.strip_prefix:
+        strip_prefix = ctx.attr.strip_prefix
+    else:
+        strip_prefix = ctx.label.package
+
     runner_out_file = ctx.actions.declare_file(ctx.label.name + ".bash")
     substitutions = {
         "@@ARGS@@": shell.array_literal(args),
         "@@BIN_DIRECTORY@@": ctx.bin_dir.path,
         "@@OUTPUT_DIRECTORY@@": ctx.attr.output,
         "@@STATE_FILE_PATH@@": state_file,
+        "@@STRIPPREFIX@@": strip_prefix,
         "@@STATELY_SHORT_PATH@@": shell.quote(ctx.executable._stately.short_path),
         "@@NAME@@": "//%s:%s" % (ctx.label.package, ctx.label.name),
     }
@@ -54,6 +60,9 @@ stately = rule(
         ),
         "state_file": attr.string(
             doc = "The state file name",
+        ),
+        "strip_prefix": attr.string(
+            doc = "A prefix to strip from files being staged in, defaults to package path",
         ),
         "_stately": attr.label(
             default = "//stately:stately_tool",
