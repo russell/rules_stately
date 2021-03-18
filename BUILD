@@ -1,4 +1,5 @@
 load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
+load("@io_bazel_stardoc//stardoc:stardoc.bzl", "stardoc")
 load("//stately:stately.bzl", "stately")
 
 buildifier(
@@ -6,7 +7,6 @@ buildifier(
 )
 
 
-load("@io_bazel_stardoc//stardoc:stardoc.bzl", "stardoc")
 
 stardoc(
     name = "stately_doc",
