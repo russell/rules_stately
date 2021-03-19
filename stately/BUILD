@@ -3,7 +3,7 @@ load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
 package(default_visibility = ["//visibility:public"])
 
 exports_files(
-    ["runner.bash.template"],
+    ["copy_runner.bash.template", "manifest_runner.bash.template"],
 )
 
 alias(

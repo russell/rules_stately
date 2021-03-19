@@ -13,4 +13,4 @@ NAME=@@NAME@@
 stately_short_path=`pwd`/$STATELY_SHORT_PATH
 set -x
 
-$stately_short_path "${ARGS[@]}" -L  --name "$NAME" --strip-prefix "$STRIPPREFIX" --state-file "$BUILD_WORKSPACE_DIRECTORY/$STATE_FILE_PATH" -o "$BUILD_WORKSPACE_DIRECTORY/$OUTPUT_DIRECTORY"
+$stately_short_path "${ARGS[@]}" -L --name "$NAME" --strip-prefix "$STRIPPREFIX" --state-file "$BUILD_WORKSPACE_DIRECTORY/$STATE_FILE_PATH" -o "$BUILD_WORKSPACE_DIRECTORY/$OUTPUT_DIRECTORY"

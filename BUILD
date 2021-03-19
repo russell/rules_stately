@@ -6,8 +6,6 @@ buildifier(
     name = "buildifier",
 )
 
-
-
 stardoc(
     name = "stately_doc",
     input = "//stately:stately.bzl",
