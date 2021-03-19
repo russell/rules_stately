@@ -1,0 +1,6 @@
+apiVersion: simopolis.xyz/v1alpha1
+kind: StateConfig
+target:
+  //:deploy_stately_doc:
+    files:
+    - Path: stately/README.md
