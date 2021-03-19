@@ -18,8 +18,10 @@ def _stately_show_impl(ctx):
 
     if ctx.attr.strip_prefix:
         strip_prefix = ctx.attr.strip_prefix
-    else:
+    elif ctx.attr.strip_package_prefix:
         strip_prefix = ctx.label.package
+    else:
+        strip_prefix = ctx.attr.strip_prefix
 
     runner_out_file = ctx.actions.declare_file(ctx.label.name + ".bash")
     substitutions = {
@@ -46,36 +48,42 @@ def _stately_show_impl(ctx):
         ),
     ]
 
-stately = rule(
+_stately_common_attrs = {
+    "srcs": attr.label_list(
+        mandatory = True,
+        allow_files = True,
+        doc = "The files to install",
+    ),
+    "output": attr.string(
+        doc = "The output directory",
+    ),
+    "state_file": attr.string(
+        doc = "The state file name",
+    ),
+    "strip_prefix": attr.string(
+        doc = "A prefix to strip from files being staged in, defaults to package path",
+    ),
+    "strip_package_prefix": attr.bool(
+        doc = "Strip the package path from the output directory.",
+        default = False,
+    ),
+    "_stately": attr.label(
+        default = "//stately:stately_tool",
+        cfg = "host",
+        allow_single_file = True,
+        executable = True,
+    ),
+    "_runner": attr.label(
+        default = "//stately:runner.bash.template",
+        allow_single_file = True,
+    ),
+}
+
+project_installed_files = rule(
     implementation = _stately_show_impl,
     executable = True,
-    attrs = {
-        "srcs": attr.label_list(
-            mandatory = True,
-            allow_files = True,
-            doc = "The files we want to install",
-        ),
-        "output": attr.string(
-            doc = "The output directory",
-        ),
-        "state_file": attr.string(
-            doc = "The state file name",
-        ),
-        "strip_prefix": attr.string(
-            doc = "A prefix to strip from files being staged in, defaults to package path",
-        ),
-        "_stately": attr.label(
-            default = "//stately:stately_tool",
-            cfg = "host",
-            allow_single_file = True,
-            executable = True,
-        ),
-        "_runner": attr.label(
-            default = "//stately:runner.bash.template",
-            allow_single_file = True,
-        ),
-    },
+    attrs = _stately_common_attrs,
     doc = """
-Generate the Stately project and show it
-""",
+Install generated files into the project.
+    """,
 )
