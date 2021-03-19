@@ -56,21 +56,13 @@ def _stately_manifest_impl(ctx):
 
     args = ["manifest"]
 
-    if ctx.attr.strip_prefix:
-        strip_prefix = ctx.attr.strip_prefix
-    elif ctx.attr.strip_package_prefix:
-        strip_prefix = ctx.label.package
-    else:
-        strip_prefix = ctx.attr.strip_prefix
-
     runner_out_file = ctx.actions.declare_file(ctx.label.name + ".bash")
     substitutions = {
         "@@ARGS@@": shell.array_literal(args),
-        "@@FILE@@": ctx.files.src.path,
+        "@@FILE@@": ctx.files.src[0].short_path,
         "@@BIN_DIRECTORY@@": ctx.bin_dir.path,
         "@@OUTPUT_DIRECTORY@@": ctx.attr.output,
         "@@STATE_FILE_PATH@@": state_file,
-        "@@STRIPPREFIX@@": strip_prefix,
         "@@STATELY_SHORT_PATH@@": shell.quote(ctx.executable._stately.short_path),
         "@@NAME@@": "//%s:%s" % (ctx.label.package, ctx.label.name),
     }
@@ -84,7 +76,7 @@ def _stately_manifest_impl(ctx):
     return [
         DefaultInfo(
             files = depset([runner_out_file]),
-            runfiles = ctx.runfiles(files = [ctx.executable._stately] + [ctx.files.src]),
+            runfiles = ctx.runfiles(files = [ctx.executable._stately] + ctx.files.src),
             executable = runner_out_file,
         ),
     ]
@@ -95,13 +87,6 @@ _stately_common_attrs = {
     ),
     "state_file": attr.string(
         doc = "The state file name",
-    ),
-    "strip_prefix": attr.string(
-        doc = "A prefix to strip from files being staged in, defaults to package path",
-    ),
-    "strip_package_prefix": attr.bool(
-        doc = "Strip the package path from the output directory.",
-        default = False,
     ),
     "_stately": attr.label(
         default = "//stately:stately_tool",
@@ -116,6 +101,13 @@ _stately_copy_attrs = {
         mandatory = True,
         allow_files = True,
         doc = "The files to install",
+    ),
+    "strip_package_prefix": attr.bool(
+        doc = "Strip the package path from the output directory.",
+        default = False,
+    ),
+    "strip_prefix": attr.string(
+        doc = "A prefix to strip from files being staged in, defaults to package path",
     ),
     "_runner": attr.label(
         default = "//stately:copy_runner.bash.template",
