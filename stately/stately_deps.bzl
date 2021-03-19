@@ -1,19 +1,22 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
+
+VERSION="v0.6.0"
 
 def stately_repositories():
     http_archive(
         name = "stately_linux",
-        urls = ["https://github.com/russell/stately/releases/download/v0.5.0/stately-linux-amd64.tar.gz"],
+        urls = ["https://github.com/russell/stately/releases/download/%s/stately-linux-amd64.tar.gz" % VERSION],
         build_file = "@com_github_russell_rules_stately//stately:stately.BUILD",
     )
 
     http_archive(
         name = "stately_osx",
-        urls = ["https://github.com/russell/stately/releases/download/v0.5.0/stately-darwin-amd64.tar.gz"],
+        urls = ["https://github.com/russell/stately/releases/download/%s/stately-darwin-amd64.tar.gz" % VERSION],
         build_file = "@com_github_russell_rules_stately//stately:stately.BUILD",
     )
 
-    _maybe(
+    maybe(
         http_archive,
         name = "bazel_skylib",
         urls = [
@@ -22,8 +25,3 @@ def stately_repositories():
         ],
         sha256 = "1c531376ac7e5a180e0237938a2536de0c54d93f5c278634818e0efc952dd56c",
     )
-
-def _maybe(repo_rule, name, **kwargs):
-    if name not in native.existing_rules():
-        repo_rule(name = name, **kwargs)
-        return True
