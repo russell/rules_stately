@@ -61,5 +61,5 @@ git_repository(
 load("@io_bazel_stardoc//:setup.bzl", "stardoc_repositories")
 stardoc_repositories()
 
-load("//stately:stately_deps.bzl", "stately_repositories")
+load("//stately:deps.bzl", "stately_repositories")
 stately_repositories()

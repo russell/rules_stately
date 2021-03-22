@@ -3,5 +3,5 @@ local_repository(
     path = "../",
 )
 
-load("@com_github_russell_rules_stately//stately:stately_deps.bzl", "stately_repositories")
+load("@com_github_russell_rules_stately//stately:deps.bzl", "stately_repositories")
 stately_repositories()

@@ -1,4 +1,4 @@
-load("@com_github_russell_rules_stately//stately:stately.bzl", "project_installed_files")
+load("@com_github_russell_rules_stately//stately:defs.bzl", "project_installed_files")
 
 genrule(
     name = "file.txt",

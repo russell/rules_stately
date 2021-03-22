@@ -16,7 +16,7 @@ alias(
 
 bzl_library(
     name = "stately_lib",
-    srcs = ["stately.bzl"],
+    srcs = ["defs.bzl"],
     deps = [
         "@bazel_skylib//lib:shell.bzl",
     ],
