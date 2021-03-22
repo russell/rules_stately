@@ -2,3 +2,7 @@
 /bazel-out
 /bazel-rules_stately
 /bazel-testlogs
+/example/bazel-bin
+/example/bazel-example
+/example/bazel-out
+/example/bazel-testlogs
