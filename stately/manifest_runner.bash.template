@@ -11,7 +11,5 @@ NAME=@@NAME@@
 
 # Get the absolute path to the stately executable
 stately_short_path=`pwd`/$STATELY_SHORT_PATH
-set -x
-cat "${FILE}"
 
 cat "${FILE}" | $stately_short_path "${ARGS[@]}" --name "$NAME" --state-file "$BUILD_WORKSPACE_DIRECTORY/$STATE_FILE_PATH" -o "$BUILD_WORKSPACE_DIRECTORY/$OUTPUT_DIRECTORY"
