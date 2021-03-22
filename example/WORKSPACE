@@ -1,0 +1,7 @@
+local_repository(
+    name = "com_github_russell_rules_stately",
+    path = "../",
+)
+
+load("@com_github_russell_rules_stately//stately:stately_deps.bzl", "stately_repositories")
+stately_repositories()

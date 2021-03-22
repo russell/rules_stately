@@ -14,7 +14,9 @@ def _stately_copy_impl(ctx):
         a
         for a in ["copy"] + [f.short_path for f in input_files]
         if a != ""
-    ]
+    ] + (
+        ["--file-mode=%s" % ctx.attr.mode]  if ctx.attr.mode else []
+    )
 
     if ctx.attr.strip_prefix:
         strip_prefix = ctx.attr.strip_prefix
@@ -107,7 +109,10 @@ _stately_copy_attrs = {
         default = False,
     ),
     "strip_prefix": attr.string(
-        doc = "A prefix to strip from files being staged in, defaults to package path",
+        doc = "A prefix to strip from files being staged in, defaults to package path.",
+    ),
+    "mode": attr.string(
+        doc = "The mode to set all copied files to.",
     ),
     "_runner": attr.label(
         default = "//stately:copy_runner.bash.template",
@@ -128,7 +133,7 @@ _stately_manifest_attrs = {
     "src": attr.label(
         mandatory = True,
         allow_single_file = True,
-        doc = "The files to manifest",
+        doc = "The files to manifest.",
     ),
     "_runner": attr.label(
         default = "//stately:manifest_runner.bash.template",

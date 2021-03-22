@@ -1,0 +1,6 @@
+apiVersion: simopolis.xyz/v1alpha1
+kind: StateConfig
+target:
+  //:install_files:
+    files:
+    - Path: file.txt
