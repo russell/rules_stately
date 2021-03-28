@@ -1,7 +1,7 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 
-VERSION="v0.7.1"
+VERSION="v0.7.4"
 
 def stately_repositories():
     http_archive(
