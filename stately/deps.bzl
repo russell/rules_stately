@@ -1,21 +1,21 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 
-VERSION="v0.7.5"
+VERSION="v0.9.3"
 
 def stately_repositories():
     http_archive(
         name = "stately_linux",
         urls = ["https://github.com/russell/stately/releases/download/%s/stately-linux-amd64.tar.gz" % VERSION],
         build_file = "@com_github_russell_rules_stately//stately:stately.BUILD",
-        sha256 = "c34600c5741922d7042ec498e8d275096c75a94ee62a143dcf1ed14c5c0f8183",
+        sha256 = "87afe2387f6aeec7af170a0f54933d8aab788c3cd809c549337ef9b6b5dac491",
     )
 
     http_archive(
         name = "stately_osx",
         urls = ["https://github.com/russell/stately/releases/download/%s/stately-darwin-amd64.tar.gz" % VERSION],
         build_file = "@com_github_russell_rules_stately//stately:stately.BUILD",
-        sha256 = "8e4ab6027241bce431e86ce69259af5d09b88f710fcdc48988bacc9da1df01a5",
+        sha256 = "dcb9584c5144e05405cfec98f034f1ab44d2dea9f71b83a88d8b8391ba706834",
     )
 
     maybe(
